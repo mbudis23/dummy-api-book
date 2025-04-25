@@ -1,14 +1,14 @@
 const express = require('express');
 const cors = require('cors');
-const serverless = require('serverless-http');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // Enable CORS for all routes and allow any origin
 app.use(cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    origin: '*', // Allow all origins explicitly
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Specify allowed headers
 }));
 
 // Dummy data for books
@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Books API!');
 });
 
-// Export the app and the serverless handler
-module.exports = app;
-module.exports.handler = serverless(app);
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
