@@ -4,8 +4,12 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Enable CORS for all routes
-app.use(cors());
+// Enable CORS for all routes and allow any origin
+app.use(cors({
+    origin: '*', // Allow all origins explicitly
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Specify allowed headers
+}));
 
 // Dummy data for books
 const books = [
